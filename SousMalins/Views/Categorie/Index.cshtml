@@ -1,0 +1,39 @@
+﻿@model List<Categorie>
+
+@{
+    ViewData["Title"] = "Liste des catégories";
+}
+
+<a asp-controller="Categorie" asp-action="CreationCategorie" class="btn btn-primary">Nouvelle catégorie</a>
+
+<table id="categorieTable" class="table table-striped custom-table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Libelle</th>
+            <th>Sous-Categories</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var categorie in Model)
+        {
+            <tr>
+                <td>@categorie.Id</td>
+                <td>@categorie.Libelle</td>
+                <td>
+                    <div>
+                    @foreach (var sousCategorie in categorie.SousCategories)
+                    {
+                        @sousCategorie.Libelle;
+                        @if (sousCategorie != categorie.SousCategories.Last())
+                        {
+                            @:, 
+                        }
+                    }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

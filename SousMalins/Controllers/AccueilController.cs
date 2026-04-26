@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace SousMalins.Controllers
 {
-    public class HomeController : Controller
+    public class AccueilController : Controller
     {
         public IActionResult Index()
         {
