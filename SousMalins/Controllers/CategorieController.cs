@@ -27,6 +27,7 @@ namespace SousMalins.Controllers
             }
         }
 
+        #region Create
         [HttpGet]
         public async Task<IActionResult> CreationCategorie()
         {
@@ -56,5 +57,36 @@ namespace SousMalins.Controllers
                 return View(categorie);
             }
         }
+        #endregion
+
+        #region Delete
+        [HttpGet]
+        public async Task<IActionResult> DeleteCategorie(int id)
+        {
+            Categorie? toDelete = await _categorieService.GetCategorieByIdAsync(id);
+            if (toDelete == null)
+            {
+                TempData["Error"] = "Catégorie introuvable.";
+                return RedirectToAction("Index");
+            }
+
+            return View(toDelete);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCategorieConfirmation(int id)
+        {
+            try
+            {
+                await _categorieService.DeleteCategorieAsync(id);
+                TempData["Success"] = "Catégorie supprimée";
+            }
+            catch (Exception)
+            {
+                TempData["Error"] = "Erreur lors de la suppression.";
+            }
+            return RedirectToAction("Index");
+        }
+        #endregion
     }
 }

@@ -38,7 +38,7 @@ namespace SousMalins.Data
                 .HasOne(c => c.CategorieMere)
                 .WithMany(c => c.SousCategories)
                 .HasForeignKey(c => c.CategorieMereId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

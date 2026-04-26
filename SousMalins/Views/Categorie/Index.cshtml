@@ -12,6 +12,7 @@
             <th>Id</th>
             <th>Libelle</th>
             <th>Sous-Categories</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +32,9 @@
                         }
                     }
                     </div>
+                </td>
+                <td>
+                    <a asp-action="DeleteCategorie" asp-route-id="@categorie.Id" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>
         }
