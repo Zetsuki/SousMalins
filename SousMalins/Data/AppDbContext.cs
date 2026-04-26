@@ -33,6 +33,12 @@ namespace SousMalins.Data
                 .HasOne(c => c.TypeCompte)
                 .WithMany(tc => tc.Comptes)
                 .HasForeignKey(c => c.TypeCompteId);
+
+            modelBuilder.Entity<Categorie>()
+                .HasOne(c => c.CategorieMere)
+                .WithMany(c => c.SousCategories)
+                .HasForeignKey(c => c.CategorieMereId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
