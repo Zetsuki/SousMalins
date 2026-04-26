@@ -4,7 +4,7 @@
     ViewData["Title"] = "Liste des catégories";
 }
 
-<a asp-controller="Categorie" asp-action="CreationCategorie" class="btn btn-primary">Nouvelle catégorie</a>
+<a asp-controller="Categorie" asp-action="CreateCategorie" class="btn btn-primary">Nouvelle catégorie</a>
 
 <table id="categorieTable" class="table table-striped custom-table">
     <thead>
@@ -34,6 +34,7 @@
                     </div>
                 </td>
                 <td>
+                    <a asp-action="UpdateCategorie" asp-route-id="@categorie.Id" class="btn btn-primary">Modifier</a>
                     <a asp-action="DeleteCategorie" asp-route-id="@categorie.Id" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>

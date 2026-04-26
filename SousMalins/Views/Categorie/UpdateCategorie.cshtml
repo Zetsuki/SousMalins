@@ -1,0 +1,31 @@
+﻿@model Categorie
+
+@{
+    ViewData["Title"] = "Modifier une catégorie";
+}
+
+<h2>Modifier une catégorie</h2>
+
+<form asp-action="UpdateCategorie" method="Post">
+    <div class="mb-3">
+        <label asp-for="Libelle" class="form-label"></label>
+        <input asp-for="Libelle" class="form-control" />
+        <span asp-validation-for="Libelle" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CategorieMereId" class="form-label">Catégorie mère</label>
+        <select asp-for="CategorieMereId" class="form-select">
+            <option value="">-- Aucune --</option>
+
+            @foreach (var cat in ViewBag.Categories)
+            {
+                <option value="@cat.Id">@cat.Libelle</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Modifier
+    </button>
+</form>

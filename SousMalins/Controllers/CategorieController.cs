@@ -29,14 +29,14 @@ namespace SousMalins.Controllers
 
         #region Create
         [HttpGet]
-        public async Task<IActionResult> CreationCategorie()
+        public async Task<IActionResult> CreateCategorie()
         {
             ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreationCategorie(Categorie categorie)
+        public async Task<IActionResult> CreateCategorie(Categorie categorie)
         {
             if (!ModelState.IsValid)
             {
@@ -57,6 +57,48 @@ namespace SousMalins.Controllers
                 return View(categorie);
             }
         }
+        #endregion
+
+        #region Update
+        [HttpGet]
+        public async Task<IActionResult> UpdateCategorie(int id)
+        {
+            ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
+            Categorie? categorie = await _categorieService.GetCategorieByIdAsync(id);
+            if(categorie != null)
+            {
+                return View(categorie);
+            }
+            else
+            {
+                TempData["Error"] = "Erreur modification catégorie";
+                return View("Index");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCategorie(Categorie categorie)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
+                return View(categorie);
+            }
+
+            try
+            {
+                await _categorieService.UpdateCategorieAsync(categorie.Id, categorie);
+                TempData["Success"] = "Catégorie modifiée avec succès";
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                TempData["Error"] = "Erreur lors de la modification";
+                ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
+                return View(categorie);
+            }
+        }
+
         #endregion
 
         #region Delete

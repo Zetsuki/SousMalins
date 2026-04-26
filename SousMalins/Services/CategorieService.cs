@@ -26,6 +26,26 @@ namespace SousMalins.Services
         }
         #endregion
 
+        #region Update
+        public async Task UpdateCategorieAsync(int id, Categorie categorie)
+        {
+            Categorie? toUpdate = await _context.Categories.FindAsync(id);
+            if(toUpdate != null)
+            {
+                toUpdate.Libelle = categorie.Libelle;
+                toUpdate.CategorieMereId = categorie.CategorieMereId;
+
+                _context.Categories.Update(toUpdate);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new KeyNotFoundException("Catégorie introuvable");
+            }
+        }
+
+        #endregion
+
         #region Read
         public async Task<List<Categorie>> GetAllCategoriesAsync()
         {
@@ -36,11 +56,15 @@ namespace SousMalins.Services
         #region Delete
         public async Task DeleteCategorieAsync(int id)
         {
-            var categorie = await _context.Categories.FindAsync(id);
+            Categorie? categorie = await _context.Categories.FindAsync(id);
             if (categorie != null)
             {
                 _context.Categories.Remove(categorie);
                 await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new KeyNotFoundException("Catégorie introuvable");
             }
         }
         #endregion
