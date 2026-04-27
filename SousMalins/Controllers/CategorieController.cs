@@ -13,7 +13,7 @@ namespace SousMalins.Controllers
             _categorieService = categorieService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexCategorie()
         {
             try
             {
@@ -48,7 +48,7 @@ namespace SousMalins.Controllers
             {
                 await _categorieService.CreateCategorieAsync(categorie);
                 TempData["Success"] = "Catégorie créée avec succès";
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexCategorie");
             }
             catch
             {
@@ -72,7 +72,7 @@ namespace SousMalins.Controllers
             else
             {
                 TempData["Error"] = "Erreur modification catégorie";
-                return View("Index");
+                return View("IndexCategorie");
             }
         }
 
@@ -89,7 +89,7 @@ namespace SousMalins.Controllers
             {
                 await _categorieService.UpdateCategorieAsync(categorie.Id, categorie);
                 TempData["Success"] = "Catégorie modifiée avec succès";
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexCategorie");
             }
             catch
             {
@@ -109,7 +109,7 @@ namespace SousMalins.Controllers
             if (toDelete == null)
             {
                 TempData["Error"] = "Catégorie introuvable.";
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexCategorie");
             }
 
             return View(toDelete);
@@ -127,7 +127,7 @@ namespace SousMalins.Controllers
             {
                 TempData["Error"] = "Erreur lors de la suppression.";
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexCategorie");
         }
         #endregion
     }

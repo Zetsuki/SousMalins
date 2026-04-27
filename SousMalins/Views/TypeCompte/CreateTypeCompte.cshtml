@@ -1,0 +1,25 @@
+﻿@model TypeCompte
+
+@{
+    ViewData["Title"] = "Créer un type de compte";
+}
+
+<h2>Créer un type de compte</h2>
+
+<form asp-action="CreateTypeCompte" method="post">
+    <div class="mb-3">
+        <label asp-for="Libelle" class="form-label"></label>
+        <input asp-for="Libelle" class="form-control" />
+        <span asp-validation-for="Libelle" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Plafond" class="form-label"></label>
+        <input asp-for="Plafond" class="form-control" />
+        <span asp-validation-for="Plafond" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Créer
+    </button>
+    
+</form>

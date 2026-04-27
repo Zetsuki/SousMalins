@@ -7,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<CategorieService>();
+builder.Services.AddScoped<TypeCompteService>();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<SousMalinsDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
 
@@ -36,7 +37,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Accueil}/{action=Index}/{id?}");
+    pattern: "{controller=Accueil}/{action=IndexAccueil}/{id?}");
 
 
 app.Run();

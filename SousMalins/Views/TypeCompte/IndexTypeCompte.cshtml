@@ -1,0 +1,34 @@
+﻿@model List<TypeCompte>
+
+@{
+    ViewData["Title"] = "Liste des type de compte";
+}
+
+<h2>Liste des type de comptes</h2>
+
+<a asp-controller="TypeCompte" asp-action="CreateTypeCompte" class="btn btn-primary">Nouveau type de compte</a>
+
+<table id="typeCompteTable" class="table table-striped custom-table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Libelle</th>
+            <th>Plafond</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var typeCompte in Model)
+        {
+            <tr>
+                <td>@typeCompte.Id</td>
+                <td>@typeCompte.Libelle</td>
+                <td>@typeCompte.Plafond</td>
+                <td>
+                    <a asp-action="UpdateTypeCompte" asp-route-id="@typeCompte.Id" class="btn btn-primary">Modifier</a>
+                    <a asp-action="DeleteTypeCompte" asp-route-id="@typeCompte.Id" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

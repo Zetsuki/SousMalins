@@ -10,7 +10,7 @@ using SousMalins.Data;
 
 namespace SousMalins.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(SousMalinsDbContext))]
     [Migration("20260426133319_ModelChange")]
     partial class ModelChange
     {

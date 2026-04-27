@@ -9,7 +9,7 @@ using SousMalins.Data;
 
 namespace SousMalins.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(SousMalinsDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

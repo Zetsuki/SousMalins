@@ -6,9 +6,9 @@ namespace SousMalins.Services
 {
     public class CategorieService
     {
-        public readonly AppDbContext _context;
+        public readonly SousMalinsDbContext _context;
 
-        public CategorieService(AppDbContext context)
+        public CategorieService(SousMalinsDbContext context)
         {
             _context = context;
         }

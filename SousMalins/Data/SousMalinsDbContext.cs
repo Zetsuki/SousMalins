@@ -3,14 +3,14 @@ using SousMalins.Models;
 
 namespace SousMalins.Data
 {
-    public class AppDbContext : DbContext
+    public class SousMalinsDbContext : DbContext
     {
         public DbSet<Compte> Comptes => Set<Compte>();
         public DbSet<Transaction> Transactions => Set<Transaction>();
         public DbSet<Categorie> Categories => Set<Categorie>();
         public DbSet<TypeCompte> TypeComptes => Set<TypeCompte>();
 
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        public SousMalinsDbContext(DbContextOptions<SousMalinsDbContext> options)
             : base(options)
         {
         }

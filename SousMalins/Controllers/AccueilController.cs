@@ -6,7 +6,7 @@ namespace SousMalins.Controllers
 {
     public class AccueilController : Controller
     {
-        public IActionResult Index()
+        public IActionResult IndexAccueil()
         {
             return View();
         }

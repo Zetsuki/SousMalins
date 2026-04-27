@@ -10,7 +10,7 @@ using SousMalins.Data;
 
 namespace SousMalins.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(SousMalinsDbContext))]
     [Migration("20260426110806_AddCategorieCategorieMereId")]
     partial class AddCategorieCategorieMereId
     {
