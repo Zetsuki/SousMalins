@@ -71,7 +71,7 @@ namespace SousMalins.Controllers
             }
             else
             {
-                TempData["Error"] = "Erreur modification catégorie";
+                TempData["Error"] = "Erreur modification catégorie.";
                 return View("IndexCategorie");
             }
         }
@@ -88,12 +88,12 @@ namespace SousMalins.Controllers
             try
             {
                 await _categorieService.UpdateCategorieAsync(categorie.Id, categorie);
-                TempData["Success"] = "Catégorie modifiée avec succès";
+                TempData["Success"] = "Catégorie modifiée avec succès.";
                 return RedirectToAction("IndexCategorie");
             }
             catch
             {
-                TempData["Error"] = "Erreur lors de la modification";
+                TempData["Error"] = "Erreur lors de la modification.";
                 ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
                 return View(categorie);
             }
@@ -121,7 +121,7 @@ namespace SousMalins.Controllers
             try
             {
                 await _categorieService.DeleteCategorieAsync(id);
-                TempData["Success"] = "Catégorie supprimée";
+                TempData["Success"] = "Catégorie supprimée.";
             }
             catch (Exception)
             {

@@ -20,10 +20,6 @@ namespace SousMalins.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Categorie?> GetCategorieByIdAsync(int id)
-        {
-            return await _context.Categories.FindAsync(id);
-        }
         #endregion
 
         #region Update
@@ -50,6 +46,10 @@ namespace SousMalins.Services
         public async Task<List<Categorie>> GetAllCategoriesAsync()
         {
             return await _context.Categories.ToListAsync();
+        }
+        public async Task<Categorie?> GetCategorieByIdAsync(int id)
+        {
+            return await _context.Categories.FindAsync(id);
         }
         #endregion
 
