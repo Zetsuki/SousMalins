@@ -1,10 +1,14 @@
 ﻿@model Categorie
 
-<h3>Confirmer la suppression ?</h3>
+@{
+    ViewData["Title"] = "Suppression catégorie";
+}
 
-<div>
-    <h3>@Model.Libelle</h3>
-</div>
+<section class="flex-column">
+    <h2 class="fw-bold">Confirmer la suppression de la catégorie @Model.Libelle ?</h2>
+    <p class="text-danger">Cette action est définitive ! </p>
+    <hr />
+</section>
 
 <form asp-action="DeleteCategorieConfirmation" method="post">
     <input type="hidden" asp-for="Id" />
@@ -13,7 +17,7 @@
         Oui, supprimer
     </button>
 
-    <a asp-action="Index" class="btn btn-secondary">
+    <a asp-action="IndexCategorie" class="btn btn-secondary">
         Annuler
     </a>
 </form>

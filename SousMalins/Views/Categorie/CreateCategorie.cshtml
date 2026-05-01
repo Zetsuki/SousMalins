@@ -1,33 +1,33 @@
 ﻿@model Categorie
 
 @{
-    ViewData["Title"] = "Créer une catégorie";
+    ViewData["Title"] = "Création catégorie";
 }
 
-<h2>Créer une catégorie</h2>
+<section class="flex-column">
+    <h2 class="fw-bold">Créer une catégorie personnalisée</h2>
+    <p class="text-secondary">Organisez vos dépenses avec des catégories personnalisées.</p>
+</section>
 
 <form asp-action="CreateCategorie" method="post">
+    <div class="row">
+        <div class="mb-3 form-group col">
+            <label asp-for="Libelle" class="form-label"></label>
+            <input asp-for="Libelle" class="form-control" />
+            <span asp-validation-for="Libelle" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col">
+            <label asp-for="Description" class="form-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
     
-    <div class="mb-3">
-        <label asp-for="Libelle" class="form-label"></label>
-        <input asp-for="Libelle" class="form-control" />
-        <span asp-validation-for="Libelle" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="CategorieMereId" class="form-label">Catégorie mère</label>
-        <select asp-for="CategorieMereId" class="form-select">
-            <option value="">-- Aucune --</option>
-
-            @foreach (var cat in ViewBag.Categories)
-            {
-                <option value="@cat.Id">@cat.Libelle</option>
-            }
-        </select>
-    </div>
-
     <button type="submit" class="btn btn-primary">
-        Créer
+        Ajouter
     </button>
+    <a asp-action="IndexCategorie" class="btn btn-secondary">
+        Retour
+    </a>
 
 </form>

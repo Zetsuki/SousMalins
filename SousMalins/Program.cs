@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<CategorieService>();
-builder.Services.AddScoped<TypeCompteService>();
 
 builder.Services.AddDbContext<SousMalinsDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));

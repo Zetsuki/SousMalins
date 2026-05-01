@@ -1,31 +1,32 @@
 ﻿@model Categorie
 
 @{
-    ViewData["Title"] = "Modifier une catégorie";
+    ViewData["Title"] = "Modification catégorie";
 }
 
-<h2>Modifier une catégorie</h2>
+<section class="flex-column">
+    <h2 class="fw-bold">Modifier une catégorie personnalisée</h2>
+    <p class="text-secondary">Organisez vos dépenses avec des catégories personnalisées.</p>
+</section>
 
 <form asp-action="UpdateCategorie" method="Post">
-    <div class="mb-3">
-        <label asp-for="Libelle" class="form-label"></label>
-        <input asp-for="Libelle" class="form-control" />
-        <span asp-validation-for="Libelle" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="CategorieMereId" class="form-label">Catégorie mère</label>
-        <select asp-for="CategorieMereId" class="form-select">
-            <option value="">-- Aucune --</option>
-
-            @foreach (var cat in ViewBag.Categories)
-            {
-                <option value="@cat.Id">@cat.Libelle</option>
-            }
-        </select>
+    <div class="row">
+        <div class="mb-3 form-group col">
+            <label asp-for="Libelle" class="form-label"></label>
+            <input asp-for="Libelle" class="form-control" />
+            <span asp-validation-for="Libelle" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col">
+            <label asp-for="Description" class="form-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
     </div>
 
     <button type="submit" class="btn btn-primary">
         Modifier
     </button>
+    <a asp-action="IndexCategorie" class="btn btn-secondary">
+        Retour
+    </a>
 </form>

@@ -29,7 +29,7 @@ namespace SousMalins.Services
             if(toUpdate != null)
             {
                 toUpdate.Libelle = categorie.Libelle;
-                toUpdate.CategorieMereId = categorie.CategorieMereId;
+                toUpdate.Description = categorie.Description;
 
                 _context.Categories.Update(toUpdate);
                 await _context.SaveChangesAsync();

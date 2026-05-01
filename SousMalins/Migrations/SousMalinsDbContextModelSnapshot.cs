@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SousMalins.Data;
 
@@ -11,11 +10,9 @@ using SousMalins.Data;
 namespace SousMalins.Migrations
 {
     [DbContext(typeof(SousMalinsDbContext))]
-    [Migration("20260426133319_ModelChange")]
-    partial class ModelChange
+    partial class SousMalinsDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
@@ -26,8 +23,8 @@ namespace SousMalins.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CategorieMereId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Libelle")
                         .IsRequired()
@@ -35,7 +32,8 @@ namespace SousMalins.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategorieMereId");
+                    b.HasIndex("Libelle")
+                        .IsUnique();
 
                     b.ToTable("Categories");
                 });
@@ -46,18 +44,26 @@ namespace SousMalins.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<bool>("Actif")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Libelle")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Montant")
+                    b.Property<int>("Plafond")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TypeCompteId")
+                    b.Property<int>("SoldeInitial")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("SoldeInitialDate")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TypeCompteId");
+                    b.HasIndex("Libelle")
+                        .IsUnique();
 
                     b.ToTable("Comptes");
                 });
@@ -68,7 +74,10 @@ namespace SousMalins.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CategorieId")
+                    b.Property<bool>("Actif")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CategorieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("CompteId")
@@ -83,52 +92,55 @@ namespace SousMalins.Migrations
                     b.Property<int>("Montant")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("TransfertId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TypeTransaction")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategorieId");
 
                     b.HasIndex("CompteId");
 
+                    b.HasIndex("TransfertId");
+
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("SousMalins.Models.TypeCompte", b =>
+            modelBuilder.Entity("SousMalins.Models.Transfert", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Libelle")
-                        .IsRequired()
+                    b.Property<bool>("Actif")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CompteDestinationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CompteSourceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Plafond")
+                    b.Property<string>("Libelle")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Montant")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TypeComptes");
-                });
+                    b.HasIndex("CompteDestinationId");
 
-            modelBuilder.Entity("SousMalins.Models.Categorie", b =>
-                {
-                    b.HasOne("SousMalins.Models.Categorie", "CategorieMere")
-                        .WithMany("SousCategories")
-                        .HasForeignKey("CategorieMereId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                    b.HasIndex("CompteSourceId");
 
-                    b.Navigation("CategorieMere");
-                });
-
-            modelBuilder.Entity("SousMalins.Models.Compte", b =>
-                {
-                    b.HasOne("SousMalins.Models.TypeCompte", "TypeCompte")
-                        .WithMany("Comptes")
-                        .HasForeignKey("TypeCompteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TypeCompte");
+                    b.ToTable("Transferts");
                 });
 
             modelBuilder.Entity("SousMalins.Models.Transaction", b =>
@@ -136,8 +148,7 @@ namespace SousMalins.Migrations
                     b.HasOne("SousMalins.Models.Categorie", "Categorie")
                         .WithMany("Transactions")
                         .HasForeignKey("CategorieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("SousMalins.Models.Compte", "Compte")
                         .WithMany("Transactions")
@@ -145,26 +156,54 @@ namespace SousMalins.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SousMalins.Models.Transfert", "Transfert")
+                        .WithMany("Transactions")
+                        .HasForeignKey("TransfertId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.Navigation("Categorie");
 
                     b.Navigation("Compte");
+
+                    b.Navigation("Transfert");
+                });
+
+            modelBuilder.Entity("SousMalins.Models.Transfert", b =>
+                {
+                    b.HasOne("SousMalins.Models.Compte", "CompteDestination")
+                        .WithMany("TransfertsDestination")
+                        .HasForeignKey("CompteDestinationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SousMalins.Models.Compte", "CompteSource")
+                        .WithMany("TransfertsSource")
+                        .HasForeignKey("CompteSourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CompteDestination");
+
+                    b.Navigation("CompteSource");
                 });
 
             modelBuilder.Entity("SousMalins.Models.Categorie", b =>
                 {
-                    b.Navigation("SousCategories");
-
                     b.Navigation("Transactions");
                 });
 
             modelBuilder.Entity("SousMalins.Models.Compte", b =>
                 {
                     b.Navigation("Transactions");
+
+                    b.Navigation("TransfertsDestination");
+
+                    b.Navigation("TransfertsSource");
                 });
 
-            modelBuilder.Entity("SousMalins.Models.TypeCompte", b =>
+            modelBuilder.Entity("SousMalins.Models.Transfert", b =>
                 {
-                    b.Navigation("Comptes");
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }
