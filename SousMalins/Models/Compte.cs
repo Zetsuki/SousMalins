@@ -11,6 +11,12 @@ namespace SousMalins.Models
         public int SoldeInitial { get; set; }
         public DateTime SoldeInitialDate { get; set; }
         public bool Actif { get; set; }
+        [Required]
+        public required string Type { get; set; }
+        [Required]
+        public required string Banque { get; set; }
+        [Required]
+        public required string Titulaire { get; set; }
 
         // Proprietés de navigation
         public List<Transaction> Transactions { get; set; } = new();

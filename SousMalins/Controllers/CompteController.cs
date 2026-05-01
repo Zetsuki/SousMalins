@@ -14,7 +14,7 @@ namespace SousMalins.Controllers
             _compteService = compteService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexCompte()
         {
             List<Compte> list = await _compteService.GetAllCompteAsync();
             return View(list);
