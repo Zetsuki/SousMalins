@@ -1,15 +1,14 @@
-﻿#panel_compte {
-    background-color: #FFFFFF
+﻿.panel_compte {
+    background-color: #FFFFFF;
+    flex-basis: 260px;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
-#green_p {
-    color: green
+.green_div {
+    background-color: #d8f9da
 }
 
-#red_p {
-    color: red
-}
-
-#bg_green_div {
-    background-color: #EEFFEF
+.red_div {
+    background-color: #ffe3e7
 }
