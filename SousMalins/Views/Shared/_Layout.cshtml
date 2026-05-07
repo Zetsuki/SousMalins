@@ -10,34 +10,46 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SousMalins.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/compte.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SousMalins</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Accueil" asp-action="IndexAccueil">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categorie" asp-action="IndexCategorie">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Compte" asp-action="IndexCompte">Comptes</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="d-flex">
+
+        <!-- SideBar -->
+        @{
+            var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+        }
+        <aside class="sidebar d-flex flex-column bg-white shadow-sm vh-100 py-4 w-100">
+            <div class="d-flex gap-2 align-items-center ps-3">
+                <i class="bi bi-piggy-bank-fill fs-3"></i>
+                <a class="nav-link fs-5 fw-bold" asp-area="" asp-controller="Accueil" asp-action="IndexAccueil">SousMalins</a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+            <ul class="navbar-nav mt-3">
+                <li class="nav-item d-flex align-items-center rounded-end-3 text-secondary gap-2 ps-3 me-3 @(controller == "Accueil" ? "bg-primary-subtle" : "")">
+                    <i class="bi bi-house-fill @(controller == "Accueil" ? "text-primary" : "")"></i>
+                    <a class="nav-link @(controller == "Accueil" ? "text-primary" : "")" asp-area="" asp-controller="Accueil" asp-action="IndexAccueil">Accueil</a>
+                </li>
+                <li class="nav-item d-flex align-items-center rounded-end-3 text-secondary gap-2 mt-2 ps-3 me-3 @(controller == "Compte" ? "bg-primary-subtle" : "")">
+                    <i class="bi bi-bank @(controller == "Compte" ? "text-primary" : "")"></i>
+                    <a class="nav-link @(controller == "Compte" ? "text-primary" : "")" asp-area="" asp-controller="Compte" asp-action="IndexCompte">Comptes</a>
+                </li>
+                <li class="nav-item d-flex align-items-center rounded-end-3 text-secondary gap-2 mt-2 ps-3 me-3 @(controller == "Transaction" ? "bg-primary-subtle" : "")">
+                    <i class="bi bi-arrow-left-right @(controller == "Transaction" ? "text-primary" : "")"></i>
+                    <a class="nav-link @(controller == "Transaction" ? "text-primary" : "")" asp-area="" asp-controller="Transaction" asp-action="IndexTransaction">Transactions</a>
+                </li>
+                <li class="nav-item d-flex align-items-center rounded-end-3 text-secondary gap-2 mt-2 ps-3 me-3 @(controller == "Categorie" ? "bg-primary-subtle" : "")">
+                    <i class="bi bi-tag-fill @(controller == "Categorie" ? "text-primary" : "")"></i>
+                    <a class="nav-link @(controller == "Categorie" ? "text-primary" : "")" asp-area="" asp-controller="Categorie" asp-action="IndexCategorie">Categories</a>
+                </li>
+                <li class="nav-item d-flex align-items-center rounded-end-3 text-secondary gap-2 mt-2 ps-3 me-3 @(controller == "Rapport" ? "bg-primary-subtle" : "")">
+                    <i class="bi bi-graph-up @(controller == "Rapport" ? "text-primary" : "")"></i>
+                    <a class="nav-link @(controller == "Rapport" ? "text-primary" : "")" asp-area="" asp-controller="Rapport" asp-action="IndexRapport">Rapports</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main role="main" class="main pt-2 px-5 w-100">
             @if (TempData["Success"] != null)
             {
                 <div class="alert alert-success">
@@ -58,19 +70,13 @@
             }
             @RenderBody()
         </main>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.datatables.net/2.3.7/js/dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/2.3.7/js/dataTables.bootstrap5.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - SousMalins - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.bootstrap5.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
 
