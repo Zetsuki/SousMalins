@@ -1,0 +1,23 @@
+﻿@model Compte
+
+@{
+    ViewData["Title"] = "Suppression compte";
+}
+
+<section class="flex-column">
+    <h2 class="fw-bold">Confirmer la suppression du compte @Model.Libelle ?</h2>
+    <p class="text-danger">Cette action est définitive ! </p>
+    <hr />
+</section>
+
+<form asp-action="DeleteCompteConfirmation" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Oui, supprimer
+    </button>
+
+    <a asp-action="IndexCompte" class="btn btn-secondary">
+        Annuler
+    </a>
+</form>

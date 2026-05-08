@@ -1,4 +1,5 @@
-﻿@model List<Compte>
+﻿@using SousMalins.ViewModels.Compte
+@model IndexCompteViewModel
 @{
     ViewData["Title"] = "Liste des comptes";
 }
@@ -17,44 +18,19 @@
     </div>
 
     <!-- Panel comptes. TODO replace mocks-->
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-center gap-5">
 
-        <div class="panel_compte d-flex flex-column align-items-center  rounded-4 shadow border border-2 border-primary pt-1">
-            <p class="mb-1">Compte Courant</p>
-            <p class="fw-bold fs-5 mb-1">1250,00 €</p>
-            <div class="green_div d-inline-flex align-items-center gap-2 rounded-4 px-2 py-1 mb-2">
-                <p class="m-0 text-success">↑ +200,00 €</p>
-                <p class="text-secondary m-0">ce mois</p>
+        @foreach (var compte in Model.Comptes)
+        {
+            <div class="panel_compte d-flex flex-column align-items-center  rounded-4 shadow border border-2 pt-1">
+                <p class="mb-1">@compte.Libelle</p>
+                <p class="fw-bold fs-5 mb-1">@compte.SoldeActuel €</p>
+                <div class="green_div d-inline-flex align-items-center gap-2 rounded-4 px-2 py-1 mb-2">
+                    <p class="m-0 text-success">@compte.VariationMensuelle €</p>
+                    <p class="text-secondary m-0">ce mois</p>
+                </div>
             </div>
-        </div>
-
-        <div class="panel_compte d-flex flex-column align-items-center rounded-4 shadow pt-1">
-            <p class="mb-1">Livret A</p>
-            <p class="fw-bold fs-5 mb-1">2800,00 €</p>
-            <div class="green_div d-inline-flex align-items-center gap-2 rounded-4 px-2 py-1 mb-2">
-                <p id="green_p" class="m-0 text-success">↑ +80,00 €</p>
-                <p class="text-secondary m-0">ce mois</p>
-            </div>
-        </div>
-
-        <div class="panel_compte d-flex flex-column align-items-center rounded-4 shadow pt-1">
-            <p class="mb-1">Carte Visa</p>
-            <p class="fw-bold fs-5 mb-1">-120,00 €</p>
-            <div class="red_div d-inline-flex align-items-center gap-2 rounded-4 px-2 py-1 mb-2">
-                <p id="red_p" class="m-0 text-danger">↓ -60,00 €</p>
-                <p class="text-secondary m-0">ce mois</p>
-            </div>
-        </div>
-
-        <div class="panel_compte d-flex flex-column align-items-center rounded-4 shadow pt-1">
-            <p class="mb-1">Compte Joint</p>
-            <p class="fw-bold fs-5 mb-1">3450,00 €</p>
-            <div class="green_div d-inline-flex align-items-center gap-2 rounded-4 px-2 py-1 mb-2">
-                <p id="green_p" class="m-0 text-success">↑ +150,00 €</p>
-                <p class="text-secondary m-0">ce mois</p>
-            </div>
-        </div>
-
+        }
     </div>
 
     <!-- Détail compte et dernières transactions. TODO replace mocks-->
@@ -122,6 +98,7 @@
         </div>
     </div>
 
+    <!-- Liste des comptes  TODO: calcul solde actuel et variation mois et envoie dans viewmodel index-->
     <div class="px-3 pt-2 bg-white shadow rounded-4">
         <h5 class="fw-bold">Tous vos comptes</h5>
         <div class="table_compte-container">
@@ -136,66 +113,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Compte courant</td>
-                        <td>Compte courant</td>
-                        <td>1250.00  €</td>
-                        <td class="text-success">+200.00 €</td>
-                        <td>
-                            <a asp-action="UpdateCompte" asp-route-id="monid"><i class="bi bi-pen pe-2"></i></a>
-                            <a asp-action="DeleteCompte" asp-route-id="monid"><i class="bi bi-trash3 text-danger"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Livret A</td>
-                        <td>Epargne</td>
-                        <td>2800.00  €</td>
-                        <td class="text-success">+80.00 €</td>
-                        <td>
-                            <a asp-action="UpdateCompte" asp-route-id="monid"><i class="bi bi-pen pe-2"></i></a>
-                            <a asp-action="DeleteCompte" asp-route-id="monid"><i class="bi bi-trash3 text-danger"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carte Visa</td>
-                        <td>Carte Bancaire</td>
-                        <td>-120.00  €</td>
-                        <td class="text-danger">-120.00 €</td>
-                        <td>
-                            <a asp-action="UpdateCompte" asp-route-id="monid"><i class="bi bi-pen pe-2"></i></a>
-                            <a asp-action="DeleteCompte" asp-route-id="monid"><i class="bi bi-trash3 text-danger"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Compte courant</td>
-                        <td>Compte courant</td>
-                        <td>3450.00  €</td>
-                        <td class="text-success">+150.00 €</td>
-                        <td>
-                            <a asp-action="UpdateCompte" asp-route-id="monid"><i class="bi bi-pen pe-2"></i></a>
-                            <a asp-action="DeleteCompte" asp-route-id="monid"><i class="bi bi-trash3 text-danger"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Compte courant</td>
-                        <td>Compte courant</td>
-                        <td>3450.00  €</td>
-                        <td class="text-success">+150.00 €</td>
-                        <td>
-                            <a asp-action="UpdateCompte" asp-route-id="monid"><i class="bi bi-pen pe-2"></i></a>
-                            <a asp-action="DeleteCompte" asp-route-id="monid"><i class="bi bi-trash3 text-danger"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Compte courant</td>
-                        <td>Compte courant</td>
-                        <td>3450.00  €</td>
-                        <td class="text-success">+150.00 €</td>
-                        <td>
-                            <a asp-action="UpdateCompte" asp-route-id="monid"><i class="bi bi-pen pe-2"></i></a>
-                            <a asp-action="DeleteCompte" asp-route-id="monid"><i class="bi bi-trash3 text-danger"></i></a>
-                        </td>
-                    </tr>
+                    @foreach(var compte in Model.Comptes)
+                    {
+                        <tr>
+                            <td>@compte.Libelle</td>
+                            <td>@compte.Type</td>
+                            <td>@compte.SoldeActuel</td>
+                            <td class="@(compte.VariationMensuelle > 0 ? "text-success" : "text-danger")">@compte.VariationMensuelle</td>
+                            <td>
+                                <a asp-action="UpdateCompte" asp-route-id="@compte.Id"><i class="bi bi-pen pe-2"></i></a>
+                                <a asp-action="DeleteCompte" asp-route-id="@compte.Id"><i class="bi bi-trash3 text-danger"></i></a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

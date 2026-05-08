@@ -31,7 +31,6 @@ namespace SousMalins.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateCategorie()
         {
-            ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
             return View();
         }
 
@@ -40,7 +39,6 @@ namespace SousMalins.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
                 return View(categorie);
             }
 
@@ -53,7 +51,6 @@ namespace SousMalins.Controllers
             catch
             {
                 TempData["Error"] = "Erreur lors de la création";
-                ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
                 return View(categorie);
             }
         }
@@ -63,7 +60,6 @@ namespace SousMalins.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateCategorie(int id)
         {
-            ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
             Categorie? categorie = await _categorieService.GetCategorieByIdAsync(id);
             if(categorie != null)
             {
@@ -81,7 +77,6 @@ namespace SousMalins.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
                 return View(categorie);
             }
 
@@ -94,7 +89,6 @@ namespace SousMalins.Controllers
             catch
             {
                 TempData["Error"] = "Erreur lors de la modification.";
-                ViewBag.Categories = await _categorieService.GetAllCategoriesAsync();
                 return View(categorie);
             }
         }

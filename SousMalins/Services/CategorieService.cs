@@ -22,6 +22,16 @@ namespace SousMalins.Services
 
         #endregion
 
+        #region Read
+        public async Task<List<Categorie>> GetAllCategoriesAsync()
+        {
+            return await _context.Categories.ToListAsync();
+        }
+        public async Task<Categorie?> GetCategorieByIdAsync(int id)
+        {
+            return await _context.Categories.FindAsync(id);
+        }
+
         #region Update
         public async Task UpdateCategorieAsync(int id, Categorie categorie)
         {
@@ -42,15 +52,6 @@ namespace SousMalins.Services
 
         #endregion
 
-        #region Read
-        public async Task<List<Categorie>> GetAllCategoriesAsync()
-        {
-            return await _context.Categories.ToListAsync();
-        }
-        public async Task<Categorie?> GetCategorieByIdAsync(int id)
-        {
-            return await _context.Categories.FindAsync(id);
-        }
         #endregion
 
         #region Delete

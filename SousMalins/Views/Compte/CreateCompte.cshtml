@@ -1,5 +1,60 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Compte
+
 @{
+    ViewData["Title"] = "Création compte";
 }
+
+<section class="flex-column">
+    <h2 class="fw-bold">Créer un compte</h2>
+    <p class="text-secondary">Gérez vos comptes et suivez leurs soldes.</p>
+</section>
+
+<form asp-action="CreateCompte" method="post">
+    <div class="row">
+        <div class="mb-3 form-group col-md-6">
+            <label asp-for="Libelle" class="form-label"></label>
+            <input asp-for="Libelle" class="form-control" />
+            <span asp-validation-for="Libelle" class="text-danger"></span>
+        </div>
+        <div class="mb-3 form-group col-md-6">
+            <label asp-for="Plafond" class="form-label"></label>
+            <input asp-for="Plafond" class="form-control" />
+            <span asp-validation-for="Plafond" class="text-danger"></span>
+        </div>
+        <div class="mb-3 form-group col-md-6">
+            <label asp-for="SoldeInitial" class="form-label">Solde Initial</label>
+            <input asp-for="SoldeInitial" class="form-control" />
+            <span asp-validation-for="SoldeInitial" class="text-danger"></span>
+        </div>
+        <div class="mb-3 form-group col-md-6">
+            <label asp-for="Type" class="form-label"></label>
+            <select asp-for="Type" class="form-select">
+                <option value="Compte courant">Compte courant</option>
+                <option value="Épargne">Épargne</option>
+                <option value="Joint">Joint</option>
+                <option value="Crédit">Crédit</option>
+                <option value="Espèces">Espèces</option>
+                <option value="Investissement">Investissement</option>
+            </select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+        <div class="mb-3 form-group col-md-6">
+            <label asp-for="Banque" class="form-label"></label>
+            <input asp-for="Banque" class="form-control" />
+            <span asp-validation-for="Banque" class="text-danger"></span>
+        </div>
+        <div class="mb-3 form-group col-md-6">
+            <label asp-for="Titulaire" class="form-label"></label>
+            <input asp-for="Titulaire" class="form-control" />
+            <span asp-validation-for="Titulaire" class="text-danger"></span>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">
+        Ajouter
+    </button>
+    <a asp-action="IndexCompte" class="btn btn-secondary">
+        Retour
+    </a>
+
+</form>
