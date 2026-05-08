@@ -4,37 +4,39 @@
     ViewData["Title"] = "Catégories";
 }
 
-<div class="d-flex justify-content-between align-items-center">
-    <section class="flex-column">
-        <h2 class="fw-bold">Catégories</h2>
-        <p class="text-secondary">Organisez vos dépenses avec des catégories personnalisées.</p>
-    </section>
-    <a asp-controller="Categorie" asp-action="CreateCategorie" class="btn btn-primary">+ Nouvelle catégorie</a>
-</div>
+<div class="d-flex flex-column min-vh-100 justify-content-start">
+    <div class="d-flex justify-content-between align-items-center">
+        <section>
+            <h2 class="fw-bold m-0 p-0">Catégories</h2>
+            <p class="text-secondary m-0 p-0">Organisez vos dépenses avec des catégories personnalisées.</p>
+        </section>
+        <a asp-controller="Categorie" asp-action="CreateCategorie" class="btn btn-primary">+ Nouvelle catégorie</a>
+    </div>
 
-<table id="categorieTable" class="table table-striped custom-table">
-    <thead>
-        <tr>
-            <th>Libelle</th>
-            <th>Description</th>
-            <th>Nb transac. associées</th>
-            <th>Montant (ce mois)</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var categorie in Model)
-        {
+    <table id="categorieTable" class="table table-striped datatable">
+        <thead>
             <tr>
-                <td>@categorie.Libelle</td>
-                <td>@categorie.Description</td>
-                <td>18</td>
-                <td>+200,00 €</td>
-                <td>
-                    <a asp-action="UpdateCategorie" asp-route-id="@categorie.Id" class="btn btn-primary">Modifier</a>
-                    <a asp-action="DeleteCategorie" asp-route-id="@categorie.Id" class="btn btn-danger">Supprimer</a>
-                </td>
+                <th>Libelle</th>
+                <th>Description</th>
+                <th>Nb transac. associées</th>
+                <th>Montant (ce mois)</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var categorie in Model)
+            {
+                <tr>
+                    <td>@categorie.Libelle</td>
+                    <td>@categorie.Description</td>
+                    <td>18</td>
+                    <td>+200,00 €</td>
+                    <td>
+                        <a asp-action="UpdateCategorie" asp-route-id="@categorie.Id" class="btn btn-primary">Modifier</a>
+                        <a asp-action="DeleteCategorie" asp-route-id="@categorie.Id" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

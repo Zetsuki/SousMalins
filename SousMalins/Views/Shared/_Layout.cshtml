@@ -49,7 +49,7 @@
         </aside>
 
         <!-- Main Content -->
-        <main role="main" class="main pt-2 px-5 w-100">
+        <main role="main" class="main px-5 w-100">
             @if (TempData["Success"] != null)
             {
                 <div class="alert alert-success">
@@ -70,20 +70,15 @@
             }
             @RenderBody()
         </main>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
         <script src="https://cdn.datatables.net/2.3.7/js/dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/2.3.7/js/dataTables.bootstrap5.min.js"></script>
+
         <script src="~/js/site.js" asp-append-version="true"></script>
         @await RenderSectionAsync("Scripts", required: false)
     </div>
 </body>
 </html>
-
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-        $('.customTable').DataTable();
-        });
-    </script>
-}

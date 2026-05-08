@@ -1,6 +1,6 @@
 ﻿.panel_compte {
     background-color: #FFFFFF;
-    flex-basis: 260px;
+    flex-basis: 200px;
     flex-grow: 0;
     flex-shrink: 0;
 }
@@ -11,4 +11,23 @@
 
 .red_div {
     background-color: #ffe3e7
+}
+
+.graph-container {
+    position: relative;
+    height: 180px;
+}
+
+.link-transac {
+    text-decoration: none;
+}
+
+.table_compte-transac {
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.table_compte-container {
+    max-height: 250px;
+    overflow-y: auto;
 }
